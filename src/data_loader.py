@@ -1,3 +1,16 @@
+"""
+Module: Data Loader
+Description: 
+    Handles the loading, inspection, cleaning, and preprocessing of the 
+    Mall Customers dataset. It serves as the data access layer for the project.
+
+Functions:
+    - load_data: Reads CSV into a Pandas DataFrame.
+    - inspect_data: Prints shape, info, and missing value statistics.
+    - preprocess_data: Cleans data (drops columns) for analysis.
+    - save_data: Persists processed data to disk.
+"""
+
 import pandas as pd
 import os
 
@@ -23,6 +36,9 @@ def inspect_data(df: pd.DataFrame):
     """
     Performs initial data exploration tasks: shape, dtypes, missing values, duplicates.
     Prints the results to stdout.
+    
+    Args:
+        df (pd.DataFrame): Dataframe to inspect.
     """
     print("--- Data Inspection ---")
     print(f"Shape: {df.shape} (Rows, Columns)")
@@ -54,6 +70,7 @@ def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
     
     if 'CustomerID' in df_clean.columns:
         df_clean = df_clean.drop(columns=['CustomerID'])
+        df_clean = df_clean.rename(columns={'pruchase spending': 'purchase spending'})
         print("Dropped 'CustomerID' column.")
     else:
         print("'CustomerID' column not found (already dropped?).")
