@@ -1,0 +1,16 @@
+# Data Manipulation
+pandas
+numpy
+
+# Visualization
+matplotlib
+seaborn
+plotly
+nbformat>=4.2.0
+
+# Machine Learning & Statistics
+scikit-learn
+scipy
+
+# Jupyter Environment
+ipykernel
