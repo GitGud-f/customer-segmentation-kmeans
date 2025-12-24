@@ -26,6 +26,8 @@ customer-segmentation/
 │   └── processed/            # Cleaned and scaled data
 │       └── Mall_Customers_Clean.csv
 │
+├── docs/                     # Pdoc generated docuemntation
+│
 ├── notebooks/
 │   └── analysis_report.ipynb # Main analysis (The Entry Point)
 │
