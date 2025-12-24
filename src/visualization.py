@@ -10,6 +10,7 @@ Functions:
     - plot_histograms: Distribution plots for numerical features.
     - plot_bivariate_scatter: Scatter plots for feature pairs.
     - plot_multivariate_bubble: 2D scatter with point size representing a 3rd dimension.
+    - plot_kmeans_clusters: Visualizes K-Means clustering results with centroids.
 """
 
 import matplotlib.pyplot as plt
@@ -114,4 +115,45 @@ def plot_multivariate_bubble(df: pd.DataFrame, x_col: str, y_col: str, size_col:
     
     plt.title(f'{x_col} vs {y_col} (Size = {size_col})', fontsize=14)
     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.) 
+    plt.show()
+    
+def plot_kmeans_clusters(df: pd.DataFrame, x_col: str, y_col: str, labels, centroids):
+    """
+    Visualizes K-Means clustering results (2D) with centroids.
+    
+    Args:
+        df (pd.DataFrame): The dataframe containing the features.
+        x_col (str): Name of the X-axis feature.
+        y_col (str): Name of the Y-axis feature.
+        labels (array): Cluster labels.
+        centroids (array): Coordinates of cluster centers.
+    """
+    plt.figure(figsize=(10, 6))
+    
+    # Plot the data points colored by cluster
+    sns.scatterplot(
+        x=df[x_col], 
+        y=df[y_col], 
+        hue=labels, 
+        palette='viridis', 
+        s=100, 
+        alpha=0.8,
+        legend='full'
+    )
+    
+    # Plot the centroids
+    # centroids[:, 0] is x-coordinates, centroids[:, 1] is y-coordinates
+    plt.scatter(
+        centroids[:, 0], 
+        centroids[:, 1], 
+        s=300, 
+        c='red', 
+        marker='X', 
+        label='Centroids'
+    )
+    
+    plt.title(f'K-Means Clustering: {x_col} vs {y_col}', fontsize=15)
+    plt.xlabel(x_col)
+    plt.ylabel(y_col)
+    plt.legend()
     plt.show()
