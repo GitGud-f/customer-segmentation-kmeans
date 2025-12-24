@@ -84,6 +84,7 @@ ipython_config.py
 
 # Data files (sometimes too large for Git)
 *.csv
+!data/raw/Mall_Customers.csv
 *.dat
 *.out
 

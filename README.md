@@ -20,10 +20,10 @@ The project follows a modular file structure to separate data, source code, and 
 ```text
 customer-segmentation/
 │
-├── data/
+├── data/                    
 │   ├── raw/                  # Original immutable dataset
 │   │   └── Mall_Customers.csv
-│   └── processed/            # Cleaned and scaled data
+│   └── processed/            # Cleaned and scaled data !NOT TRACKED WITH GIT
 │       └── Mall_Customers_Clean.csv
 │
 ├── docs/                     # Pdoc generated docuemntation
@@ -41,6 +41,10 @@ customer-segmentation/
 ├── README.md                 # Project documentation
 └── requirements.txt          # Python dependencies
 ```
+---
+## Documentation
+
+Open docs/index.html in Browser and Read the Full API Documentation
 
 ---
 
@@ -129,7 +133,7 @@ The analysis identified several distinct customer groups, including:
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 *   **Language:** Python 3.x
 *   **Data Manipulation:** Pandas, NumPy
 *   **Machine Learning:** Scikit-Learn (KMeans, AgglomerativeClustering)
@@ -139,4 +143,3 @@ The analysis identified several distinct customer groups, including:
 ---
 
 *This project was completed as part of the Data Mining Course curriculum.*
-```
