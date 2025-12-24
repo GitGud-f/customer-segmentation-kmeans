@@ -9,10 +9,12 @@ Functions:
     - inspect_data: Prints shape, info, and missing value statistics.
     - preprocess_data: Cleans data (drops columns) for analysis.
     - save_data: Persists processed data to disk.
+    - scale_features: Scales specified numerical features using Min-Max Scaling.
 """
 
 import pandas as pd
 import os
+from sklearn.preprocessing import MinMaxScaler
 
 def load_data(filepath: str) -> pd.DataFrame:
     """
@@ -94,3 +96,20 @@ def save_data(df: pd.DataFrame, filepath: str):
         
     df.to_csv(filepath, index=False)
     print(f"Data saved to {filepath}")
+    
+def scale_features(df: pd.DataFrame, columns: list) -> pd.DataFrame:
+    """
+    Scales specific columns using MinMaxScaler.
+    
+    Args:
+        df (pd.DataFrame): The original dataframe.
+        columns (list): List of column names to scale.
+        
+    Returns:
+        pd.DataFrame: A new dataframe with scaled values and original column names.
+    """
+    scaler = MinMaxScaler()
+    scaled_array = scaler.fit_transform(df[columns])
+    
+    scaled_df = pd.DataFrame(scaled_array, columns=columns)
+    return scaled_df

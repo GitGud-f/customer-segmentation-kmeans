@@ -11,9 +11,12 @@ Functions:
     - plot_bivariate_scatter: Scatter plots for feature pairs.
     - plot_multivariate_bubble: 2D scatter with point size representing a 3rd dimension.
     - plot_kmeans_clusters: Visualizes K-Means clustering results with centroids.
+    - plot_elbow_curve: Plots the Elbow Method graph.
+    - plot_3d_static: Static 3D scatter plot using Matplotlib.
 """
 
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 import seaborn as sns
 import pandas as pd
 
@@ -156,4 +159,49 @@ def plot_kmeans_clusters(df: pd.DataFrame, x_col: str, y_col: str, labels, centr
     plt.xlabel(x_col)
     plt.ylabel(y_col)
     plt.legend()
+    plt.show()
+    
+def plot_elbow_curve(inertia_values: list):
+    """
+    Plots the Elbow Method graph.
+    Args: 
+        inertia_values (list): List of inertia (WCSS) values for different K.
+    """
+    plt.figure(figsize=(10, 5))
+    plt.plot(range(1, len(inertia_values) + 1), inertia_values, marker='o', linestyle='--')
+    plt.title('Elbow Method')
+    plt.xlabel('Number of clusters (K)')
+    plt.ylabel('Inertia (WCSS)')
+    plt.xticks(range(1, len(inertia_values) + 1))
+    plt.show()
+    
+def plot_3d_static(df: pd.DataFrame, x_col, y_col, z_col, labels):
+    """
+    Creates a static 3D scatter plot using Matplotlib.
+    
+    Args:
+        df (pd.DataFrame): Dataframe containing the data.
+        x_col (str): Column name for x-axis.
+        y_col (str): Column name for y-axis.
+        z_col (str): Column name for z-axis.
+        labels (array): Cluster labels for coloring points.
+    """
+    fig = plt.figure(figsize=(12, 8))
+    ax = fig.add_subplot(111, projection='3d')
+    
+    scatter = ax.scatter(
+        df[x_col], 
+        df[y_col], 
+        df[z_col], 
+        c=labels, 
+        cmap='viridis', 
+        s=60
+    )
+    
+    ax.set_title("3D Customer Segments")
+    ax.set_xlabel(x_col)
+    ax.set_ylabel(y_col)
+    ax.set_zlabel(z_col)
+    
+    plt.colorbar(scatter, pad=0.1)
     plt.show()
