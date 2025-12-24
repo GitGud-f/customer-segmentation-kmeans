@@ -14,12 +14,14 @@ Functions:
     - plot_elbow_curve: Plots the Elbow Method graph.
     - plot_3d_static: Static 3D scatter plot using Matplotlib.
     - plot_3d_interactive: Interactive 3D scatter plot using Plotly Express.
+    - plot_dendrogram: Plots hierarchical clustering dendrogram.
 """
 
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+from scipy.cluster.hierarchy import dendrogram
 import plotly.express as px
 import seaborn as sns
+import numpy as np
 import pandas as pd
 
 # Set global styles for plots
@@ -36,13 +38,10 @@ def plot_gender_distribution(df: pd.DataFrame, column: str = 'gender'):
     """
     plt.figure(figsize=(6, 4))
     
-    # Calculate percentages
     counts = df[column].value_counts(normalize=True) * 100
     
-    # Plot
     ax = sns.barplot(x=counts.index, y=counts.values)
     
-    # Add labels
     plt.title(f'Percentage Distribution of {column}', fontsize=14)
     plt.ylabel('Percentage (%)')
     plt.xlabel(column)
@@ -135,7 +134,6 @@ def plot_kmeans_clusters(df: pd.DataFrame, x_col: str, y_col: str, labels, centr
     """
     plt.figure(figsize=(10, 6))
     
-    # Plot the data points colored by cluster
     sns.scatterplot(
         x=df[x_col], 
         y=df[y_col], 
@@ -232,3 +230,24 @@ def plot_3d_interactive(df: pd.DataFrame, x_col, y_col, z_col, color_col):
     
     fig.update_layout(margin=dict(l=0, r=0, b=0, t=30))
     fig.show()
+    
+def plot_dendrogram(linkage_matrix: np.array):
+    """
+    Plots the hierarchical clustering dendrogram.
+    Args:
+        linkage_matrix (np.array): Linkage matrix from hierarchical clustering.
+    """
+    plt.figure(figsize=(12, 7))
+    
+    dendrogram(
+        linkage_matrix,
+        leaf_rotation=90., 
+        leaf_font_size=8.,  
+        truncate_mode='lastp',
+        p=50 
+    )
+    
+    plt.title('Hierarchical Clustering Dendrogram')
+    plt.xlabel('Cluster Size / Sample Index')
+    plt.ylabel('Euclidean Distance')
+    plt.show()
