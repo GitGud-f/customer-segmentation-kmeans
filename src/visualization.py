@@ -1,5 +1,6 @@
 """
 Module: Visualization
+
 Description: 
     Contains reusable plotting functions for Exploratory Data Analysis (EDA).
     Supports univariate, bivariate, and multivariate analysis using Matplotlib
@@ -120,8 +121,8 @@ def plot_multivariate_bubble(df: pd.DataFrame, x_col: str, y_col: str, size_col:
     plt.title(f'{x_col} vs {y_col} (Size = {size_col})', fontsize=14)
     plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.) 
     plt.show()
-    
-def plot_kmeans_clusters(df: pd.DataFrame, x_col: str, y_col: str, labels, centroids):
+
+def plot_kmeans_clusters(df: pd.DataFrame, x_col: str, y_col: str, labels: np.ndarray, centroids: np.ndarray):
     """
     Visualizes K-Means clustering results (2D) with centroids.
     
@@ -164,6 +165,7 @@ def plot_kmeans_clusters(df: pd.DataFrame, x_col: str, y_col: str, labels, centr
 def plot_elbow_curve(inertia_values: list):
     """
     Plots the Elbow Method graph.
+    
     Args: 
         inertia_values (list): List of inertia (WCSS) values for different K.
     """
@@ -174,8 +176,8 @@ def plot_elbow_curve(inertia_values: list):
     plt.ylabel('Inertia (WCSS)')
     plt.xticks(range(1, len(inertia_values) + 1))
     plt.show()
-    
-def plot_3d_static(df: pd.DataFrame, x_col, y_col, z_col, labels):
+
+def plot_3d_static(df: pd.DataFrame, x_col: str, y_col: str, z_col: str, labels):
     """
     Creates a static 3D scatter plot using Matplotlib.
     
@@ -206,7 +208,7 @@ def plot_3d_static(df: pd.DataFrame, x_col, y_col, z_col, labels):
     plt.colorbar(scatter, pad=0.1)
     plt.show()
     
-def plot_3d_interactive(df: pd.DataFrame, x_col, y_col, z_col, color_col):
+def plot_3d_interactive(df: pd.DataFrame, x_col: str, y_col: str, z_col: str, color_col: str):
     """
     Creates an interactive 3D scatter plot using Plotly Express.
     Allows zooming, rotating, and hovering.
@@ -234,6 +236,7 @@ def plot_3d_interactive(df: pd.DataFrame, x_col, y_col, z_col, color_col):
 def plot_dendrogram(linkage_matrix: np.array):
     """
     Plots the hierarchical clustering dendrogram.
+    
     Args:
         linkage_matrix (np.array): Linkage matrix from hierarchical clustering.
     """

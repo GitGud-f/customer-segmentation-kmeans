@@ -1,5 +1,6 @@
 """
 Module: Clustering Logic
+
 Description: 
     Encapsulates machine learning algorithms for customer segmentation.
     Includes implementations for K-Means Clustering (Elbow Method, fitting)
