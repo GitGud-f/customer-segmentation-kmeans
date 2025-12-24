@@ -13,10 +13,12 @@ Functions:
     - plot_kmeans_clusters: Visualizes K-Means clustering results with centroids.
     - plot_elbow_curve: Plots the Elbow Method graph.
     - plot_3d_static: Static 3D scatter plot using Matplotlib.
+    - plot_3d_interactive: Interactive 3D scatter plot using Plotly Express.
 """
 
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+import plotly.express as px
 import seaborn as sns
 import pandas as pd
 
@@ -205,3 +207,28 @@ def plot_3d_static(df: pd.DataFrame, x_col, y_col, z_col, labels):
     
     plt.colorbar(scatter, pad=0.1)
     plt.show()
+    
+def plot_3d_interactive(df: pd.DataFrame, x_col, y_col, z_col, color_col):
+    """
+    Creates an interactive 3D scatter plot using Plotly Express.
+    Allows zooming, rotating, and hovering.
+    
+    Args:
+        df (pd.DataFrame): Dataframe with features and cluster labels.
+        x_col, y_col, z_col (str): Column names for axes.
+        color_col (str): Column name for cluster coloring.
+    """
+    fig = px.scatter_3d(
+        df, 
+        x=x_col, 
+        y=y_col, 
+        z=z_col,
+        color=color_col, 
+        opacity=0.7,
+        size_max=10,
+        title="Interactive 3D Customer Segments",
+        template="plotly_white"
+    )
+    
+    fig.update_layout(margin=dict(l=0, r=0, b=0, t=30))
+    fig.show()
