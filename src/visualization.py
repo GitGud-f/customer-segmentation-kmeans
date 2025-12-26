@@ -13,6 +13,7 @@ Functions:
     - plot_multivariate_bubble: 2D scatter with point size representing a 3rd dimension.
     - plot_kmeans_clusters: Visualizes K-Means clustering results with centroids.
     - plot_elbow_curve: Plots the Elbow Method graph.
+    - plot_silhouette_curve: Plots the Silhouette Score metric.
     - plot_3d_static: Static 3D scatter plot using Matplotlib.
     - plot_3d_interactive: Interactive 3D scatter plot using Plotly Express.
     - plot_dendrogram: Plots hierarchical clustering dendrogram.
@@ -177,6 +178,23 @@ def plot_elbow_curve(inertia_values: list):
     plt.xticks(range(1, len(inertia_values) + 1))
     plt.show()
 
+def plot_silhouette_curve(scores: list):
+    """
+    Plots the Silhouette Score metric.
+    
+    Args:
+        scores (list): List of silhouette scores for different K.
+    """
+    plt.figure(figsize=(10, 5))
+    # We range from 2 because silhouette isn't defined for k=1
+    plt.plot(range(2, len(scores) + 2), scores, marker='o', linestyle='--', color='orange')
+    plt.title('Silhouette Score Analysis')
+    plt.xlabel('Number of clusters (K)')
+    plt.ylabel('Silhouette Score (Higher is better)')
+    plt.xticks(range(2, len(scores) + 2))
+    plt.grid(True)
+    plt.show()
+    
 def plot_3d_static(df: pd.DataFrame, x_col: str, y_col: str, z_col: str, labels):
     """
     Creates a static 3D scatter plot using Matplotlib.

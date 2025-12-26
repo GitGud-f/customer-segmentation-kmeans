@@ -8,6 +8,7 @@ Description:
 
 Functions:
     - get_inertia_values: Computes WCSS for Elbow Method.
+    - get_silhouette_scores: Computes Silhouette Scores.
     - fit_kmeans: Trains the K-Means model.
     - get_linkage_matrix: Computes the linkage matrix for hierarchical clustering.
     - perform_hierarchical_clustering: Trains Agglomerative model.
@@ -17,6 +18,7 @@ from sklearn.cluster import KMeans
 import pandas as pd
 from scipy.cluster.hierarchy import linkage
 from sklearn.cluster import AgglomerativeClustering
+from sklearn.metrics import silhouette_score
 
 def get_inertia_values(data: pd.DataFrame, max_k: int = 10):
     """
@@ -36,6 +38,28 @@ def get_inertia_values(data: pd.DataFrame, max_k: int = 10):
         kmeans.fit(data)
         inertia.append(kmeans.inertia_)
     return inertia
+
+def get_silhouette_scores(data: pd.DataFrame, max_k: int = 10):
+    """
+    Calculates Silhouette Scores for a range of cluster numbers.
+    A higher score indicates better defined clusters.
+    
+    Args:
+        data (pd.DataFrame): Scaled data.
+        max_k (int): Maximum number of clusters to test.
+        
+    Returns:
+        list: List of silhouette scores (starting from k=2).
+    """
+    scores = []
+    # Silhouette requires at least 2 clusters, so we start range at 2
+    for k in range(2, max_k + 1):
+        kmeans = KMeans(n_clusters=k, init='k-means++', random_state=42, n_init=10)
+        labels = kmeans.fit_predict(data)
+        score = silhouette_score(data, labels)
+        scores.append(score)
+    return scores
+
 
 def fit_kmeans(data: pd.DataFrame, n_clusters: int):
     """
