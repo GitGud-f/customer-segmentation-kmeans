@@ -233,3 +233,5 @@ __marimo__/
 .VolumeIcon.icns
 Thumbs.db
 ehthumbs.db
+
+/models/*

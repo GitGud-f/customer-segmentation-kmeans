@@ -28,6 +28,10 @@ customer-segmentation/
 │
 ├── docs/                     # Pdoc generated docuemntation
 │
+├── models/                   # Serialized models for production !NOT TRACKED wITH GIT
+│   ├── kmeans_model.pkl      # Trained K-Means model
+│   └── scaler.pkl            # Fitted MinMaxScaler
+│
 ├── notebooks/
 │   └── analysis_report.ipynb # Main analysis (The Entry Point)
 │
@@ -38,6 +42,7 @@ customer-segmentation/
 │   └── clustering.py         # K-Means and Hierarchical Clustering algorithms
 │
 ├── .gitignore                # Files to exclude from Git
+├── app.py                    # Streamlit Dashboard (Web App)
 ├── README.md                 # Project documentation
 └── requirements.txt          # Python dependencies
 ```
@@ -107,6 +112,29 @@ python -m ipykernel install --user --name=mall-segmentation-env --display-name "
     ```
 2.  Open the file: `notebooks/analysis_report.ipynb`.
 3.  Run all cells to execute the data pipeline, generate plots, and view the 3D clusters.
+
+---
+
+## Model Deployment (Interactive Web App)
+
+To demonstrate the practical application of this analysis, I developed a Streamlit Dashboard. This transforms the static analysis into a production-ready inference tool that Marketing Managers can use to classify new customers in real-time.
+
+**Key Features:**
+*   **Real-time Inference:** Loads the pre-trained K-Means model (`.pkl`) to predict segments instantly without re-training.
+*   **Business Logic:** Translates cluster IDs (e.g., "0") into actionable personas (e.g., "Standard Customer") with specific marketing strategies.
+
+### How to Run the App
+
+> [!TIP]
+> Ensure you are in your virtual environment AND you ran the analysis (to get the models)
+
+Run:
+
+```bash
+streamlit run app.py
+```
+
+The application will launch in your default browser at `http://localhost:8501`.
 
 ---
 
