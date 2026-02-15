@@ -72,7 +72,7 @@ Follow these steps to set up the environment and run the project locally.
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/k3rnel-paN1c5/customer-segmentation-kmeans.git
+git clone https://github.com/GitGud-f/customer-segmentation-kmeans.git
 cd customer-segmentation-kmeans
 ```
 
